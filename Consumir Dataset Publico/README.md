@@ -1,5 +1,5 @@
 No arquivo dataset.js, substituir as chaves abaixo com o usuário de aplicativo criado no fluig  
-'token = {  
+>'token = {  
                 'public': '',  
                 'secret': ''  
         };  
