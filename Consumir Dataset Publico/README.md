@@ -1,5 +1,5 @@
 No arquivo dataset.js, substituir as chaves abaixo com o usuário de aplicativo criado no fluig  
-```
+```javascript
 token = {  
             'public': '',  
             'secret': ''  
@@ -12,7 +12,7 @@ consumer: {
             
 No arquivo javascript.js, substituir as constraints e nome do dataset pelo fornecido.  
 
-```
+```javascript
 const constraintDS = [  
     publicDataset.createConstraint("NOME_DO_CAMPO", 'VALOR', 'VALOR', ConstraintType.MUST),  
 ];  
