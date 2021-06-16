@@ -1,0 +1,1 @@
+Arquivos para auxiliar na criação de uma nova widget
