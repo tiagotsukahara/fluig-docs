@@ -29,7 +29,7 @@ const publicDataset = {
     getDataset: function(datasetName, fields, constratins, order, cb) {
         console.log(datasetName, fields, constratins, order);
         var self = this;
-        var url = WCMAPI.getServerURL();
+        var url = 'SUA URL' // ou WCMAPI.getServerURL(); para widget fluig
         var d = $.Deferred();
         var token = this.retornaToken();
         var oauth = this.retornaOauth();

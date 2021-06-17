@@ -1,4 +1,4 @@
-No arquivo dataset.js, substituir as chaves abaixo com o usuário de aplicativo criado no fluig  
+No arquivo dataset.js, substituir as chaves abaixo com o usuário de aplicativo criado no fluig e substituir a url
 ```javascript
 token = {  
             'public': '',  
@@ -7,7 +7,11 @@ token = {
 consumer: {  
             'public': '',   
             'secret': ''   
-        }, 
+        },
+```
+
+```
+var url = 'SUA URL' // ou WCMAPI.getServerURL(); para widget fluig
 ```
             
 No arquivo javascript.js, substituir as constraints e nome do dataset pelo fornecido.  
