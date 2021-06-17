@@ -4,11 +4,13 @@
     <form class="form-horizontal">
 		<#--  Título  -->
         <div class="row page-header">
-            <div class="col-md-10 fs-no-padding fs-cursor-pointer">
+            <div class="col-md-10 fs-no-padding">
                 <h1 id="page_title"></h1>
             </div>
-            <div class="col-md-2 text-right fs-no-padding">
-                <h1 class="fluigicon fluigicon-info-sign icon-md bs-docs-popover-hover"></h1>
+            <div class="col-md-2 fs-no-padding fs-cursor-pointer">
+				<div class="pull-right">
+                	<h1 class="fluigicon fluigicon-info-sign icon-md bs-docs-popover-hover"></h1>
+				</div>
             </div>
         </div>
 
