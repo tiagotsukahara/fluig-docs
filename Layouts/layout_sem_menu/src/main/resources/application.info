@@ -1,0 +1,19 @@
+application.type=layout
+application.code=layout_sem_menu
+application.title=Sem Menu
+application.description=Sem Menu
+application.category=SYSTEM
+application.renderer=freemarker
+developer.code=FLUIG_WCM_DEV
+developer.name=andre.timm
+developer.url=http://www.fluig.com
+layout.defaultSlot=SlotA
+layout.file=layout.ftl
+locale.file.base.name=layout_sem_menu
+slot.SlotGlobalAlert=alertpopover
+slot.SlotInstantSearch=suggestsearch
+slot.SlotLogin=sociallogin
+slot.SlotMenu=menu
+slot.SlotUsePolicy=usepolicy
+application.icon=icon.png
+

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss-web>
+    <context-root>/layout_sem_titulo</context-root>
+    <disable-cross-context>false</disable-cross-context>
+<!-- security-domain>java:/jaas/TOTVSTech</security-domain -->
+</jboss-web>

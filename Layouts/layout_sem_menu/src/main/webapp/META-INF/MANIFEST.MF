@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Created-By: Apache Maven
+Built-By: vanei
+Build-Jdk: 1.6.0_24
+Dependencies: org.slf4j
+

@@ -1,0 +1,19 @@
+application.type=layout
+application.code=layout_sem_titulo
+application.title=Sem titulo
+application.description=Sem titulo
+application.category=SYSTEM
+application.renderer=freemarker
+developer.code=Tsukahara
+developer.name=tiago
+developer.url=http://www.fluig.com
+layout.defaultSlot=SlotA
+layout.file=layout.ftl
+locale.file.base.name=layout_sem_titulo
+slot.SlotGlobalAlert=alertpopover
+slot.SlotInstantSearch=suggestsearch
+slot.SlotLogin=sociallogin
+slot.SlotMenu=menu
+slot.SlotUsePolicy=usepolicy
+application.icon=icon.png
+
