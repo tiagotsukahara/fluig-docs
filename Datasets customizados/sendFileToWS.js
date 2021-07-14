@@ -7,17 +7,15 @@ function onSync(lastSyncDate) {
 function createDataset(fields, constraints, sortFields) {
 
     var newDataset = DatasetBuilder.newDataset();
-    newDataset.addColumn( 'name' );
-    newDataset.addColumn( 'deal_id' );
+    newDataset.addColumn( 'retorno' );
+
 	var params = {};
 	if (constraints != null) {
         for (var i = 0; i < constraints.length; i++) {
-        	if( constraints[i].fieldName.trim() == "area" ){
-        		area = constraints[i].initialValue;
-        	}else if( constraints[i].fieldName.trim() == "deal_id" ){
-        		params[ constraints[i].fieldName.trim() ] = new org.apache.http.entity.mime.content.StringBody( constraints[i].initialValue );
+        	if( constraints[i].fieldName.trim() == "file" ){
+        		params[ constraints[i].fieldName.trim() ] = new org.apache.http.entity.mime.content.FileBody( getFile(constraints[i].initialValue ) );
         	}else {
-				params[ constraints[i].fieldName.trim() ] = new org.apache.http.entity.mime.content.FileBody( getFile(constraints[i].initialValue ) );
+				params[ constraints[i].fieldName.trim() ] = new org.apache.http.entity.mime.content.StringBody( constraints[i].initialValue );
 	       		log.info('fieldName.....'+constraints[i].fieldName+'...value....'+constraints[i].initialValue);
         	}
         }
@@ -58,20 +56,18 @@ function createDataset(fields, constraints, sortFields) {
 			// printLog( 'info', "## success ## " + jr.success);		
 			
 			if( !jr.success ){
-				throw 'Erro na integração com PipeDrive';
+				throw 'Erro na integração';
 			}
 			
 			if( jr.data != null ){
-				newDataset.addRow( 
-							new Array( jr.data.name+"",
-									   jr.data.deal_id+""
-									) );
+				newDataset.addRow( new Array( JSON.stringify( jr.data) ) );
 			}
 		}
 		
 	} catch(erro) { 
 		printLog( 'erro', "ERROOOOOO" + erro.toString() );
-		throw erro.toString();
+		newDataset.addRow( new Array( erro.toString() ) );
+		// throw erro.toString();
 	}
 	
 	return newDataset;
