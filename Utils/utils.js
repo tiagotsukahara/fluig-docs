@@ -75,19 +75,16 @@ function setMask(){
 	//Desabilita entrada de dados
 	function readOnlyAll(obj) {
 		$(obj + ' input, '+obj+' textarea, '+obj+' select').each(function () {
-			if( $(this).is('select') ){			
+			if( $(this).is('select') ){
 				$('#'+ $(this).attr('id') +' option:not(:selected)').prop('disabled', true);
-			}else{
-				$(this).attr('readonly',true);
 			}
+			$(this).attr('readonly',true);
 			// $(this).attr("readonly", true);
 		});
 	}
 
 	//Desabilita pesquisa do input
 	function disableSeach(obj) {
-		// $(obj).hide();
-		
 		$(obj + ' div').each(function(){
 			if ( $(this).hasClass('input-group') ){
 				$(this).removeClass('input-group');
@@ -157,6 +154,87 @@ function setMask(){
 		}
 	}
 
+	//Busca dados do Cnpj da Receita
+	function cnpj_receita(cnpj, cb){
+		var wcnpj = cnpj.replace(/\D/g, '');
+		if (wcnpj != "") {
+			if(validaCNPJ(cnpj)) {
+				
+				var d = $.Deferred();
+				var url = "https://www.receitaws.com.br/v1/cnpj/"+ wcnpj;
+	
+				$.ajax({
+					type: "GET",
+					dataType: "jsonp",
+					url: url,
+					crossDomain: true,
+					data: "",
+					timeout: 3000
+				}).pipe(function(p){
+					return p;
+				}).done(function(result){
+					d.resolve(result);
+					if ( result.status == 'OK' ){
+						cb.success(result);	
+					} else {
+						FLUIGC.toast({ title: '',message: result.message , type: 'danger' });	
+					}
+				}).fail(function(data){
+					d.reject
+					cb.error(data);
+				});
+	
+			}else{
+				// console.log("teste "+validacnpj)
+				FLUIGC.toast({ title: '',message: 'Formato de CNPJ inválido.' , type: 'warning' });
+			}
+		}
+	}
+
+	//Busca endereço CEP
+	function buscaCEP(cep, cb){
+		var wCep = cep.replace(/\D/g, '');
+		if (wCep != "") {				
+			var d = $.Deferred();
+			var url = "https://viacep.com.br/ws/"+ wCep +"/json/";
+
+			$.ajax({
+				type: "GET",
+				dataType: "jsonp",
+				url: url,
+				crossDomain: true,
+				data: "",
+				timeout: 3000
+			}).pipe(function(p){
+				return p;
+			}).done(function(result){
+				d.resolve(result);
+				cb.success(result);	
+			}).fail(function(data){
+				d.reject
+				cb.error(data);
+				FLUIGC.toast({ title: '',message: 'CEP Inválido', type: 'danger' });	
+			});
+		}
+	}
+	
+
+	//Retira acentos
+	function retira_acentos(palavra) {
+		com_acento = 'áàãâäéèêëíìîïóòõôöúùûüçÁÀÃÂÄÉÈÊËÍÌÎÏÓÒÕÖÔÚÙÛÜÇ';
+		sem_acento = 'aaaaaeeeeiiiiooooouuuucAAAAAEEEEIIIIOOOOOUUUUC';
+		nova = '';
+		for (i = 0; i < palavra.length; i++) {
+			if (com_acento.search(palavra.substr(i, 1)) >= 0) {
+				nova += sem_acento.substr(com_acento.search(palavra.substr(i, 1)), 1);
+			}
+			else {
+				nova += palavra.substr(i, 1);
+			}
+		}
+		return nova.replace("'", "\'");
+	}
+
 	//Converte String para Float pelo id
 	function getFloatId(id) {
 		var v = $("#" + id).val();
@@ -182,6 +260,12 @@ function setMask(){
 	//Converte de Float para String com casas decimais
 	function getStringValue(v,l) {
 		var s = String(v.toFixed(l)).replace('.', ',');
+		return s;
+	}
+
+	//Formata valor
+	function formatStringValue(v,l) {
+		var s = String(parseFloat(v).toFixed(l)).replace('.', ',');
 		return s;
 	}
 
@@ -350,6 +434,26 @@ String.prototype.extenso = function(c){
 }
 
 /*** Funções para controle de data ***/
+
+	//formata data dd/mm/yyyy
+	function formataData(data){
+		var year = data.getFullYear();
+		var daym = data.getDate();
+
+		if (daym < 10) {
+			daym = "0" + daym;
+		}
+
+		var monthm = data.getMonth() +1;
+		if (monthm < 10) {
+			monthm = "0" + monthm;
+		}
+
+		var dateNow = daym + "/" + monthm + "/" + year;
+
+		return dateNow;
+	}
+
 	//Mês em extenso
 	var arrayMes = new Array();
 		arrayMes[1] = "Janeiro"; arrayMes[2] = "Fevereiro"; arrayMes[3] = "Março"; arrayMes[4] = "Abril"; arrayMes[5] = "Maio"; arrayMes[6] = "Junho";

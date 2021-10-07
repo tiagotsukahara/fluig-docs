@@ -45,8 +45,6 @@ function createDataset(fields, constraints, sortFields) {
          return newDataset;
      }
      
-     
-    
 	 
      try{
     	 
