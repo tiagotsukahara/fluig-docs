@@ -81,29 +81,32 @@ function loadDadosDataTable(){
           console.log(dataSet.values);
           if( dataSet != null && dataSet != undefined ){
 
-              $("#paginationTable").pagination({
-                dataSource: dataSet.values,
-                pageSize: 10,
-                showGoInput: true,
-                showGoButton: true,
-                // autoHidePrevious: true,
-                // autoHideNext: true,
-                formatResult: function(data) {
-                  var regs = new Array();
-                  for (var i = 0, len = data.length; i < len; i++) {
-                      var datatableRow = {  cod_usuario: data[i]['cod_usuario'],
-                                            nom_funcionario: data[i]['nom_funcionario']
-                      }
-                      regs.push(datatableRow);                      
-                  }
-                  return regs;
-                },
-                callback: function(paginatedData, pagination){
-                  console.log(paginatedData, pagination);
-                    dataTable.reload(paginatedData);
-                    loadWindow.hide();
+            $("#paginationTable").pagination({
+              dataSource: regs,
+              pageSize: $('#pagesize').val(),
+              showGoInput: true,
+              showGoButton: true,
+              goButtonText: 'Ir',
+              className: 'paginationjs-big',
+              // autoHidePrevious: true,
+              // autoHideNext: true,
+              formatResult: function(data) {
+                var regs = new Array();
+                  for (var i = 0; i < data.length; i++) {
+                    var datatableRow = {  cod_usuario: data[i]['cod_usuario'],
+                                          nom_funcionario: data[i]['nom_funcionario']
+                    }
+                    regs.push(datatableRow);                      
                 }
-              });
+                return regs;
+              },
+              callback: function(paginatedData, pagination){
+                console.log(paginatedData, pagination);
+                  dataTable.reload(paginatedData);
+                  loadWindow.hide();
+              }
+            });
+            
           } else {
               toast('Nenhum dado encontrado', 'warning');
           }  
