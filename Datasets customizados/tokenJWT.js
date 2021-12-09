@@ -15,9 +15,10 @@ function createDataset(fields, constraints, sortFields) {
 
 		var str_header = new java.lang.String( JSON.stringify( header ) );
 		b64_header = new java.util.Base64.getUrlEncoder().withoutPadding().encodeToString( str_header.getBytes() );
+		var sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		var payload = {
-						"iat" : String( new Date().toLocaleString() ),
-						"exp" : String( new Date().setMinutes(60).toLocaleString() ),
+						"iat" : String( sdf.format( new Date() ) ),
+						"exp" : String( sdf.format( new Date().setMinutes(120) ) ),
 						"nome" : String( "Tiago" ),
 						"email" : String( "tiago.tsukahara@gmail.com" ),
 					};
