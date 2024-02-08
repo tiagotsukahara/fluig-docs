@@ -560,3 +560,20 @@ function getTable( dataSet, table ){
 		return ds.values[0]['table'];
 	}	
 }
+
+//Dataset Asyncrono
+
+function getDataset(dataset, fields, constraints, sorters) {
+    return new Promise(function (resolve, reject) {
+        DatasetFactory.getDataset(
+            dataset,
+            fields,
+            constraints,
+            sorters,
+            {
+                success: data => resolve(data),
+                error: () => reject(arguments)
+            }
+        );
+    });
+}
