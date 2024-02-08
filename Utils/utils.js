@@ -565,15 +565,9 @@ function getTable( dataSet, table ){
 
 function getDataset(dataset, fields, constraints, sorters) {
     return new Promise(function (resolve, reject) {
-        DatasetFactory.getDataset(
-            dataset,
-            fields,
-            constraints,
-            sorters,
-            {
-                success: data => resolve(data),
-                error: () => reject(arguments)
-            }
-        );
+        DatasetFactory.getDataset( dataset, fields, constraints, sorters, {
+			success: data => resolve(data),
+			error: () => reject(arguments)
+		});
     });
 }
